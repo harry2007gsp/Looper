@@ -43,7 +43,7 @@ public class NetworkConnection {
         };
     }
 
-    public void fetchData(final MainActivity.MyHandler myHandler, final Runnable runnable) {
+    public void fetchData(final MainActivity.MyHandler myHandler) {
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -72,13 +72,12 @@ public class NetworkConnection {
                 Looper.prepare();
                 testHandler = new TestHandler();
 
-
                 NetworkConnection networkConnection = new NetworkConnection();
                 String string = networkConnection.downloadWithURLConnecton();
                 list = networkConnection.parseData(string);
-                for (Model m : list) {
-                    Log.d("test", m.getPlace());
-                }
+//                for (Model m : list) {
+//                    Log.d("test", m.getPlace());
+//                }
                 Runnable myRunnable = new MainActivity.MyRunnable(list.get(0).getPlace());
                 myHandler.post(myRunnable);
                 Looper.loop();

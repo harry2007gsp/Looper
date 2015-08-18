@@ -22,19 +22,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fetchDataOnButton(View view) {
+//        Runnable runnable = new Runnable() {
+//            public String runnableString = "abcd";
+//
+//            @Override
+//            //this runnable is just like first wait for something to get executed and processed and then this
+//            // would be displayed after that.
+//            public void run() {
+//                Log.d("test", runnableString);
+//            }
+//        };
         networkConnection = new NetworkConnection();
-        Runnable runnable = new Runnable() {
-            public String runnableString = "abcd";
-
-            @Override
-            //this runnable is just like first wait for something to get executed and processed and then this
-            // would be displayed after that.
-            public void run() {
-                Log.d("test", runnableString);
-            }
-        };
-
-        networkConnection.fetchData(myHandler, runnable);
+        networkConnection.fetchData(myHandler);
         networkConnection.handlerThreadMethod();
 
     }
