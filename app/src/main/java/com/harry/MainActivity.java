@@ -32,22 +32,9 @@ public class MainActivity extends AppCompatActivity {
         bundle.putString("giveString", s);
         giveMessage.setData(bundle);
         networkConnection.testHandler.sendMessage(giveMessage);
+
     }
 
-//    public static class MyRunnable implements Runnable {
-//        private final String message;
-//
-//        MyRunnable(final String message) {
-//            this.message = message;
-//        }
-//        public void run() {
-//            Log.d("test", message);
-//            text.setText(message); // gettting data from background thread and publishing on UI
-////            networkConnection.testHandler.sendMessage(networkConnection.testHandler.obtainMessage());
-////            networkConnection.testHandler2.sendMessage(networkConnection.testHandler2.obtainMessage());
-//
-//        }
-//    }
 
 
     static class MyHandler extends Handler {

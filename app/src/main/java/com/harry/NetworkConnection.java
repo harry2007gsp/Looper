@@ -31,6 +31,7 @@ public class NetworkConnection {
     ArrayList<Model> list = new ArrayList<>();
     public TestHandler testHandler, testHandler2 ;
 
+
     public void fetchData(final MainActivity.MyHandler myHandler) {
         new Thread(new Runnable() {
             @Override
@@ -39,7 +40,6 @@ public class NetworkConnection {
                 Looper.prepare();
                 testHandler = new TestHandler();
 //                testHandler2 = new TestHandler();
-
 
                 NetworkConnection networkConnection = new NetworkConnection();
                 String string = networkConnection.downloadWithURLConnecton();
