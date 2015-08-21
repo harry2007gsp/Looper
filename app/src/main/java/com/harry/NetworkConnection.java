@@ -1,5 +1,6 @@
 package com.harry;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -30,57 +31,28 @@ public class NetworkConnection {
     ArrayList<Model> list = new ArrayList<>();
     public TestHandler testHandler, testHandler2 ;
 
-    public void handlerThreadMethod() {
-        HandlerThread handlerThread = new HandlerThread("HandlerThread");
-        handlerThread.start();
-
-// Create a handler attached to the HandlerThread's Looper
-        testHandler2 = new TestHandler() {
-            @Override
-            public void handleMessage(Message msg) {
-                Log.d("test", "HANDLER THREAD");
-            }
-        };
-    }
-
-    public void fetchData(final MainActivity.MyHandler myHandler, final Runnable runnable) {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                Log.d("test", "first run");
-//                Looper.prepare();
-//                testHandler = new TestHandler();
-//
-//
-//                NetworkConnection networkConnection = new NetworkConnection();
-//                String string = networkConnection.downloadWithURLConnecton();
-//                list = networkConnection.parseData(string);
-//                for (Model m : list) {
-//                    Log.d("test", m.getPlace());
-//                }
-//                Runnable myRunnable = new MainActivity.MyRunnable(list.get(0).getPlace());
-//                myHandler.post(myRunnable);
-//                Looper.loop();
-//
-//            }
-//
-//        }).start();
+    public void fetchData(final MainActivity.MyHandler myHandler) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 Log.d("test", "first run");
                 Looper.prepare();
                 testHandler = new TestHandler();
+//                testHandler2 = new TestHandler();
 
 
                 NetworkConnection networkConnection = new NetworkConnection();
                 String string = networkConnection.downloadWithURLConnecton();
-                list = networkConnection.parseData(string);
-                for (Model m : list) {
-                    Log.d("test", m.getPlace());
-                }
-                Runnable myRunnable = new MainActivity.MyRunnable(list.get(0).getPlace());
-                myHandler.post(myRunnable);
+//                list = networkConnection.parseData(string);
+//                for (Model m : list) {
+//                    Log.d("test", m.getPlace());
+//                }
+                String s = "hello";
+                Message message = myHandler.obtainMessage();
+                Bundle bundle = new Bundle();
+                bundle.putString("string",s);
+                message.setData(bundle);
+                myHandler.sendMessage(message);
                 Looper.loop();
 
             }
@@ -143,7 +115,10 @@ public class NetworkConnection {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            String s = msg.getData().getString("giveString");
             Log.d("test", "test handler");
+            Log.d("test", s);
+
         }
     }
 }
